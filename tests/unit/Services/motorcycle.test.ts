@@ -83,6 +83,14 @@ describe('Teste para criação de uma moto', function () {
       expect((error as Error).message).to.be.deep.equal('Invalid Mongo id');
     }
   });
+  it('Teste se o input vier inválido retorna NULL', async function () {
+    sinon.stub(Model, 'create').resolves(null);
+
+    const service = new MotorcycleService();
+    const result = await service.createMotorcycle(motorcycleInput);
+
+    expect(result).to.be.deep.equal(null);
+  });
   
   afterEach(function () {
     sinon.restore();
